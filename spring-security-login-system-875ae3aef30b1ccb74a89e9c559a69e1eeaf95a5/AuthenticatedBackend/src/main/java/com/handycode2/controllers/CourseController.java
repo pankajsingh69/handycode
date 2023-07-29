@@ -3,6 +3,7 @@ package com.handycode2.controllers;
 import com.handycode2.enums.CourseType;
 import com.handycode2.models.Course;
 import com.handycode2.repository.CourseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,18 +14,20 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/courses")
+@RequestMapping("/courses/getall")
 public class CourseController {
-    private final CourseRepository courseRepository;
+    @Autowired
+    private  CourseRepository courseRepository;
 
-    public CourseController(CourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
-    }
+//    public CourseController(CourseRepository courseRepository) {
+//        this.courseRepository = courseRepository;
+//    }
 
     // API to fetch all courses
     @GetMapping
     public List<Course> getAllCourses() {
-        return courseRepository.findAll();
+        List<Course> list = courseRepository.findAll();
+        return list;
     }
 
     // API to fetch a specific course by ID
